@@ -1,30 +1,33 @@
-import { StyleSheet, Text, TouchableOpacity, View, ImageBackground } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
 
 const EventCard = ({ event, onPress }) => {
+  // Handle case where event image might not be available yet
+  const handleImageError = () => {
+    console.warn('Image could not be loaded for event:', event.title);
+  };
+
   return (
-    <TouchableOpacity style={styles.card} onPress={() => onPress(event)}>
+    <TouchableOpacity style={styles.card} onPress={() => onPress(event)} activeOpacity={0.8}>
       <View style={styles.glowBorder}>
-        <ImageBackground 
-          source={event.backgroundImage} 
-          style={styles.backgroundImage}
-          imageStyle={{ opacity: 0.5 }}
+        <LinearGradient
+          colors={['rgba(0, 0, 60, 0.85)', 'rgba(5, 0, 20, 0.95)']}
+          style={styles.cardContent}
         >
-          <View style={styles.cardContent}>
-            <Text style={styles.mainText}>{event.title}</Text>
-            
-            <View style={styles.divider} />
-            
-            <View style={styles.infoContainer}>
-              <Text style={styles.dateText}>coming up ~ {event.date}</Text>
-              <Text style={styles.locationText}>Location 📍 {event.location}</Text>
-            </View>
-            
-            <View style={styles.bubble1} />
-            <View style={styles.bubble2} />
-            <View style={styles.bubble3} />
+          <Text style={styles.mainText}>{event.title}</Text>
+          
+          <View style={styles.divider} />
+          
+          <View style={styles.infoContainer}>
+            <Text style={styles.dateText}>coming up ~ {event.date}</Text>
+            <Text style={styles.locationText}>Location 📍 {event.location}</Text>
           </View>
-        </ImageBackground>
+          
+          <View style={styles.bubble1} />
+          <View style={styles.bubble2} />
+          <View style={styles.bubble3} />
+        </LinearGradient>
       </View>
     </TouchableOpacity>
   );
@@ -57,15 +60,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.8,
     shadowRadius: 10,
   },
-  backgroundImage: {
-    flex: 1,
-    borderRadius: 12,
-    overflow: 'hidden',
-  },
   cardContent: {
     flex: 1,
     borderRadius: 12,
-    backgroundColor: 'rgba(0, 0, 40, 0.75)',
     padding: 15,
     justifyContent: 'space-between',
     position: 'relative',

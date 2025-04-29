@@ -1,36 +1,45 @@
-import { View, Text } from 'react-native'
 import React from 'react'
 import { Tabs } from 'expo-router'
-import {Ionicons} from "@expo/vector-icons"
+import { Ionicons } from "@expo/vector-icons"
 
-const RootLayout = () => {
+const TabsLayout = () => {
   return (
     <Tabs
-
-    screenOptions={{
-        headerShown: false
-    }}
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: '#0a0a20',
+          borderTopColor: '#333',
+        },
+        tabBarActiveTintColor: '#ff00ff',
+        tabBarInactiveTintColor: '#8a8a8a',
+      }}
     >
-
-        <Tabs.Screen 
+      <Tabs.Screen 
         name='index' 
-        options={{tabBarIcon: ({size,color})=> <Ionicons name="home" size={size}color={color} />}}
-        />
+        options={{
+          title: 'Home',
+          tabBarIcon: ({size, color}) => <Ionicons name="home" size={size} color={color} />
+        }}
+      />
 
-<Tabs.Screen 
+      <Tabs.Screen 
         name='search' 
-        options={{tabBarIcon: ({size,color})=> <Ionicons name="search" size={size}color={color} />}}
-        />
+        options={{
+          title: 'Search',
+          tabBarIcon: ({size, color}) => <Ionicons name="search" size={size} color={color} />
+        }}
+      />
 
-<Tabs.Screen 
+      <Tabs.Screen 
         name='profile' 
-        options={{tabBarIcon: ({size,color})=> <Ionicons name="person" size={size}color={color} />}}
-        />
-
-
-        
+        options={{
+          title: 'Profile',
+          tabBarIcon: ({size, color}) => <Ionicons name="person" size={size} color={color} />
+        }}
+      />
     </Tabs>
   )
 }
 
-export default RootLayout
+export default TabsLayout
